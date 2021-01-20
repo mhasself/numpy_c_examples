@@ -36,7 +36,7 @@ static PyObject *contract(PyObject *self, PyObject *args) {
         Py_RETURN_NONE;
     }
 
-    // Check ordering
+    // Check ordering.
     assert(PyArray_FLAGS(v_array) & NPY_ARRAY_CARRAY);
     assert(PyArray_FLAGS(M_array) & NPY_ARRAY_CARRAY);
     assert(PyArray_FLAGS(w_array) & NPY_ARRAY_CARRAY);
@@ -81,6 +81,35 @@ static PyMethodDef helpersMethods[] = {
     {NULL, NULL, 0, NULL}        /* Sentinel */
 };
 
+#if PY_MAJOR_VERSION >= 3
+
+//
+// Python 3.x specialization
+//
+
+static struct PyModuleDef helpersModule = {
+    PyModuleDef_HEAD_INIT,
+    "chelpers",
+    NULL,
+    -1,
+    helpersMethods
+};
+
+PyMODINIT_FUNC
+PyInit_chelpers(void)
+{
+    PyObject *module = PyModule_Create(&helpersModule);
+    if (module == NULL)
+        return NULL;
+    import_array();
+    return module;
+}
+
+#else
+
+//
+// Python 2.x specialization
+//
 
 PyMODINIT_FUNC
 initchelpers(void)
@@ -88,3 +117,4 @@ initchelpers(void)
     Py_InitModule("chelpers", helpersMethods);
     import_array();
 }
+#endif

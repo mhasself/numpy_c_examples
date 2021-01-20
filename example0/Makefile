@@ -1,15 +1,21 @@
 # Module name
 MOD = chelpers
 
+# You might want to invoke make with "PYTHON=python3 make test"
+PYTHON ?= python
+
 # Source files
 SOURCE = $(MOD).c
 PYLIB = $(MOD).so
 
-default: $(PYLIB)
+default: test
+
+test: $(PYLIB)
+	$(PYTHON) test.py
 
 $(PYLIB): setup.py $(SOURCE)
-	python setup.py build --build-platlib=./ --build-temp=./
+	$(PYTHON) setup.py build --build-platlib=./ --build-temp=./
 
 clean:
 	-rm *.o
-	-rm $(PYLIB)
+	-rm $(MOD)*.so
