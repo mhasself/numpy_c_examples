@@ -9,10 +9,11 @@ jobs:
       fail-fast: true
       matrix:
         os: [a, b]
+        python: [37, 310]
         include:
-          - python: 3.7
+          - python: 37
             numpyver: 1.20
-          - python: 3.10
+          - python: 310
             numpyver: 1.22
     env:
       NUMPYVER: ${{ matrix.os }} @ ${{ matrix.numpyver }}
