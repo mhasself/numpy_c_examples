@@ -8,13 +8,14 @@ jobs:
     strategy:
       fail-fast: true
       matrix:
+        os: [a, b]
         include:
           - python: 3.7
             numpyver: 1.20
           - python: 3.10
             numpyver: 1.22
     env:
-      NUMPYVER: ${{ matrix.numpyver }}
+      NUMPYVER: ${{ matrix.os }} @ ${{ matrix.numpyver }}
     steps:
       - run: |
           echo "$NUMPYVER"
