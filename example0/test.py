@@ -4,9 +4,11 @@ import numpy as np
 import chelpers as ch
 import time
 
-M = np.random.random(size=(7000,7000))
-u = np.random.random(size=(7000))
-v = np.random.random(size=(7000))
+N = 13000
+
+M = np.random.random(size=(N,N))
+u = np.random.random(size=(N))
+v = np.random.random(size=(N))
 
 print('Running time trials of a contraction operation.')
 print('Each run will print out the time elapsed, and the result of the computation.')

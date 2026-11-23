@@ -6,6 +6,7 @@
 #define NPY_NO_DEPRECATED_API NPY_1_7_API_VERSION
 #include <numpy/arrayobject.h>
 
+#include <omp.h>
 #include <assert.h>
 
 /* Custom includes... */
@@ -64,6 +65,7 @@ static PyObject *contract(PyObject *self, PyObject *args) {
     
     // Now call CBLAS, or just:
     double sum = 0.;
+// #pragma omp parallel for reduction(+:sum)
     for (int i=0; i<nv; i++) {
         double row = 0.;
         for (int j=0; j<nw; j++)

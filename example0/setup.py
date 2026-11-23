@@ -18,7 +18,8 @@ module1 = Extension('chelpers',
                     include_dirs=includes,
                     library_dirs=library_dirs,
                     libraries=libraries,
-                    extra_compile_args=['-std=c99'])
+                    extra_compile_args=['-std=c99', '-fopenmp'],
+                    extra_link_args=['-fopenmp'])
 
 setup(name = modname,
       version = '1.0',
